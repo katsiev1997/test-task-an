@@ -35,7 +35,10 @@ const TaskModal = ({ day, onClose }: TaskModalProps) => {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl">Day {day}</h2>
           <button
-            onClick={onClose}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClose();
+            }}
             className="bg-red-500 hover:bg-red-700 font-bold text-white px-4 py-2 rounded"
           >
             Close
@@ -66,7 +69,9 @@ const TaskModal = ({ day, onClose }: TaskModalProps) => {
                 onClick={() =>
                   dispatch(toggleTaskCompletion({ day, taskId: task.id }))
                 }
-                className={`cursor-pointer hover:underline ${task.completed ? "line-through" : ""}`}
+                className={`cursor-pointer hover:underline ${
+                  task.completed ? "line-through" : ""
+                }`}
               >
                 {task.text}
               </span>
